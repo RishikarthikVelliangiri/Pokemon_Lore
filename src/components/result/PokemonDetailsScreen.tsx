@@ -35,55 +35,61 @@ const itemVariants = {
 
 export default function PokemonDetailsScreen({ pokemon, aiInsight, onNewSearch }: Readonly<PokemonDetailsScreenProps>) {
   useEffect(() => {
-    // Prefer local cries served from the Next `public` directory. The cloned repo places
-    // files under /public/cries/cries/pokemon/latest/<id>.(ogg|mp3)
-    const localOgg = `/cries/cries/pokemon/latest/${pokemon.id}.ogg`;
-    const localMp3 = `/cries/cries/pokemon/latest/${pokemon.id}.mp3`;
-    const externalMp3 = `https://raw.githubusercontent.com/PokeAPI/cries/master/cries/pokemon/latest/${pokemon.id}.mp3`;
+    // Try local cries first (expected under /public/cries/pokemon/latest/) then fallback to the
+    // public GitHub dataset to cover environments where the local assets are not bundled.
+    const cryCandidates = [
+      `/cries/pokemon/latest/${pokemon.id}.ogg`,
+      `/cries/pokemon/latest/${pokemon.id}.mp3`,
+      `https://raw.githubusercontent.com/PokeAPI/cries/master/cries/pokemon/latest/${pokemon.id}.ogg`,
+      `https://raw.githubusercontent.com/PokeAPI/cries/master/cries/pokemon/latest/${pokemon.id}.mp3`,
+    ] as const;
 
     let cancelled = false;
     let sound: Howl | null = null;
+    let timer: ReturnType<typeof setTimeout> | null = null;
 
     async function findAndPlayCry() {
-      try {
-        // Check OGG first
-        const tryOgg = await fetch(localOgg, { method: 'HEAD' });
-        if (!cancelled && tryOgg.ok) {
-          sound = new Howl({ src: [localOgg], html5: true });
-        } else {
-          // Try MP3 locally
-          const tryMp3 = await fetch(localMp3, { method: 'HEAD' });
-          if (!cancelled && tryMp3.ok) {
-            sound = new Howl({ src: [localMp3], html5: true });
-          } else {
-            // Fallback to the external raw github file (older path)
-            sound = new Howl({ src: [externalMp3], html5: true });
+      for (const candidate of cryCandidates) {
+        if (cancelled) break;
+
+        try {
+          const response = candidate.startsWith('http')
+            ? await fetch(candidate, { method: 'HEAD', mode: 'cors' })
+            : await fetch(candidate, { method: 'HEAD' });
+
+          if (!response.ok) {
+            continue;
+          }
+
+          const format = candidate.endsWith('.ogg') ? ['ogg'] : ['mp3'];
+          sound = new Howl({ src: [candidate], html5: true, format });
+          break;
+        } catch (error) {
+          // HEAD may fail for cross-origin, so allow Howler to try loading remote assets directly
+          if (candidate.startsWith('http')) {
+            const format = candidate.endsWith('.ogg') ? ['ogg'] : ['mp3'];
+            sound = new Howl({ src: [candidate], html5: true, format });
+            break;
           }
         }
+      }
 
-        // Short delay to let the entry animation start
-        if (!cancelled && sound) {
-          const timer = setTimeout(() => sound?.play(), 300);
-          // Ensure we clear the timer on cleanup
-          return () => clearTimeout(timer);
-        }
-      } catch (e) {
-        // Network errors shouldn't break the UI; ignore
-        console.warn('Failed to load cry for', pokemon.id, e);
+      if (!cancelled && sound) {
+        timer = setTimeout(() => sound?.play(), 300);
+      } else if (!sound) {
+        console.warn('No cry available for Pokémon', pokemon.id);
       }
     }
 
-    const cleanupTimerOrSound = findAndPlayCry();
+    findAndPlayCry();
 
     return () => {
       cancelled = true;
-      // Stop and unload Howl if created
+      if (timer) clearTimeout(timer);
       if (sound) {
         if (typeof sound.stop === 'function') sound.stop();
         if (typeof (sound as any).unload === 'function') (sound as any).unload();
       }
-      // If findAndPlayCry returned a cleanup function (timer), call it
-      if (typeof cleanupTimerOrSound === 'function') (cleanupTimerOrSound as any)();
     };
   }, [pokemon.id]); // Re-run this effect only when the Pokémon ID changes
 
