@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# optional local asset mirrors
+public/cries/
+public/pokemon-assets/

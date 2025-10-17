@@ -2,9 +2,8 @@ import { DetailedPokemon } from '@/types/pokemon';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
 
-// Lazy import types from pokemon-assets if available at runtime
-// Use local SVG assets cloned into public/pokemon-assets
-const typeIconPath = (typeName: string) => `/pokemon-assets/assets/svg/types/${typeName.toLowerCase()}.svg`;
+const TYPE_ICON_BASE_URL = 'https://raw.githubusercontent.com/itsjavi/pokemon-assets/gh-pages/assets/svg/types';
+const typeIconPath = (typeName: string) => `${TYPE_ICON_BASE_URL}/${typeName.toLowerCase()}.svg`;
 
 interface PokemonSpriteProps {
   pokemon: DetailedPokemon;
@@ -17,6 +16,7 @@ export default function PokemonSprite(props: Readonly<PokemonSpriteProps>) {
   // The modern URL for these seems to be from Pokemon Showdown.
   const animatedSpriteUrl = `https://play.pokemonshowdown.com/sprites/xyani/${pokemon.name.toLowerCase()}.gif`;
   const [spriteSrc, setSpriteSrc] = useState(animatedSpriteUrl);
+  const [typeIconFailures, setTypeIconFailures] = useState<Record<string, boolean>>({});
 
   // Reset spriteSrc when pokemon changes
   useEffect(() => {
@@ -49,11 +49,29 @@ export default function PokemonSprite(props: Readonly<PokemonSpriteProps>) {
 
       {/* Render type badges below the sprite to match in-game layout */}
       <div className="sprite-type-row mt-2 text-center">
-        {(types || pokemon.types || []).map((t: string) => (
-          <span key={t} className={`type-badge type-${t.toLowerCase()}`} title={t} aria-label={t}>
-            <Image src={typeIconPath(t)} alt={`${t} icon`} width={28} height={28} unoptimized />
-          </span>
-        ))}
+        {(types || pokemon.types || []).map((t: string) => {
+          const key = t.toLowerCase();
+          const iconFailed = typeIconFailures[key];
+
+          return (
+            <span key={t} className={`type-badge type-${key}`} title={t} aria-label={t}>
+              {iconFailed ? (
+                <span className="type-badge-label">{t.slice(0, 1)}</span>
+              ) : (
+                <Image
+                  src={typeIconPath(t)}
+                  alt={`${t} icon`}
+                  width={28}
+                  height={28}
+                  unoptimized
+                  onError={() => {
+                    setTypeIconFailures(prev => (prev[key] ? prev : { ...prev, [key]: true }));
+                  }}
+                />
+              )}
+            </span>
+          );
+        })}
       </div>
     </div>
   );

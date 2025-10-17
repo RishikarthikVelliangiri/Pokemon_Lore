@@ -322,6 +322,16 @@ body {
   display: inline-block;
 }
 
+.type-badge-label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  font-weight: 600;
+  color: inherit;
+}
+
 /* gap for sprite type row handled earlier */
 
 /* AI Analysis Box */
