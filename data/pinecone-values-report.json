@@ -1,0 +1,12 @@
+{
+  "checkedPokemonRange": [
+    1,
+    911
+  ],
+  "totalVectors": 2731,
+  "vectorsWithValues": 2731,
+  "vectorsMissingValues": 0,
+  "missingSamplesCount": 0,
+  "missingSamples": [],
+  "generatedAt": "2025-09-18T21:50:53.394Z"
+}

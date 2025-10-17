@@ -1,27 +1,40 @@
 {
   "name": "pokemon-lore-engine",
   "version": "0.1.0",
+  "engines": {
+    "node": ">=18"
+  },
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "ingest-data": "tsx scripts/ingest-pokemon-data.ts",
+    "test-connections": "tsx scripts/test-connections.ts"
   },
   "dependencies": {
+    "@google/generative-ai": "^0.24.1",
+    "@pinecone-database/pinecone": "^6.1.2",
+    "framer-motion": "^12.23.12",
+    "howler": "^2.2.4",
+  "pokemon-assets": "^1.3.0",
+    "next": "15.5.2",
     "react": "19.1.0",
-    "react-dom": "19.1.0",
-    "next": "15.5.2"
+    "react-dom": "19.1.0"
   },
   "devDependencies": {
-    "typescript": "^5",
+    "@eslint/eslintrc": "^3",
+    "@tailwindcss/postcss": "^4",
+    "@types/howler": "^2.2.12",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "@tailwindcss/postcss": "^4",
-    "tailwindcss": "^4",
+    "dotenv": "^17.2.2",
     "eslint": "^9",
     "eslint-config-next": "15.5.2",
-    "@eslint/eslintrc": "^3"
+    "tailwindcss": "^4",
+    "tsx": "^4.20.5",
+    "typescript": "^5"
   }
 }

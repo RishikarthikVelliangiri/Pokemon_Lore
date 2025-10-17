@@ -1,0 +1,1019 @@
+{
+  "timestamp": "2025-09-22T03:52:08.659Z",
+  "results": [
+    {
+      "prompt": "a dark looking dragon that helps with ideals",
+      "response": {
+        "id": 644,
+        "name": "zekrom",
+        "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/644.png",
+        "types": [
+          "dragon",
+          "electric"
+        ],
+        "aiInsight": "Zekrom, the Deep Black Pokémon, is a legendary dragon Pokémon that helps those who strive for ideals.  It possesses immense power and can scorch the world with its lightning.\n",
+        "pokedexEntries": [
+          {
+            "version": "black",
+            "text": "Concealing itself in lightning clouds, it flies throughout the Unova region. It creates electricity in its tail.",
+            "entry": "Concealing itself in lightning clouds, it flies throughout the Unova region. It creates electricity in its tail."
+          },
+          {
+            "version": "white",
+            "text": "This Pokémon appears in legends. In its tail, it has a giant generator that creates electricity.",
+            "entry": "This Pokémon appears in legends. In its tail, it has a giant generator that creates electricity."
+          },
+          {
+            "version": "black-2",
+            "text": "This legendary Pokémon can scorch the world with lightning. It assists those who want to build an ideal world.",
+            "entry": "This legendary Pokémon can scorch the world with lightning. It assists those who want to build an ideal world."
+          }
+        ],
+        "stats": [
+          {
+            "name": "HP",
+            "value": 100
+          },
+          {
+            "name": "Attack",
+            "value": 150
+          },
+          {
+            "name": "Defense",
+            "value": 120
+          },
+          {
+            "name": "Sp. Attack",
+            "value": 120
+          },
+          {
+            "name": "Sp. Defense",
+            "value": 100
+          },
+          {
+            "name": "Speed",
+            "value": 90
+          }
+        ],
+        "height": 29,
+        "weight": 3450,
+        "abilities": [
+          {
+            "name": "teravolt",
+            "description": "This Pokémon's moves completely ignore abilities that could hinder or prevent their effect on the target.\n\nFor example, this Pokémon's moves ignore abilities that would fully negate them, such as water absorb; abilities that would prevent any of their effects, such as clear body, shell armor, or sticky hold; and abilities that grant any general protective benefit, such as simple, snow cloak, or thick fat.  If an ability could either hinder or help this Pokémon's moves, e.g. dry skin or unaware, the ability is ignored either way.\n\nAbilities that do not fit this description, even if they could hinder moves in some other way, are not affected.  For example, cursed body only affects potential future uses of the move, while liquid ooze and shadow tag can only hinder a move's effect on the user.  This ablity cannot ignore type or form changes granted by abilities, for example color change or forecast; nor effects that were caused by abilities but are no longer tied to an ability, such as the rain from drizzle.  This ability cannot ignore multitype at all.\n\nAn ability ignored by this ability is only nullified while the move is being used.  For example, this Pokémon's moves can paralyze a Pokémon with limber, but Limber will activate and heal the paralysis immediately thereafter, and this Pokémon's spikes are not affected by this ability after they have been placed.\n\nWhen this Pokémon enters battle, all participating trainers are notified that it has this ability.\n\nThis ability functions identically to mold breaker and turboblaze.",
+            "isHidden": false,
+            "effect": "This Pokémon's moves completely ignore abilities that could hinder or prevent their effect on the target.\n\nFor example, this Pokémon's moves ignore abilities that would fully negate them, such as water absorb; abilities that would prevent any of their effects, such as clear body, shell armor, or sticky hold; and abilities that grant any general protective benefit, such as simple, snow cloak, or thick fat.  If an ability could either hinder or help this Pokémon's moves, e.g. dry skin or unaware, the ability is ignored either way.\n\nAbilities that do not fit this description, even if they could hinder moves in some other way, are not affected.  For example, cursed body only affects potential future uses of the move, while liquid ooze and shadow tag can only hinder a move's effect on the user.  This ablity cannot ignore type or form changes granted by abilities, for example color change or forecast; nor effects that were caused by abilities but are no longer tied to an ability, such as the rain from drizzle.  This ability cannot ignore multitype at all.\n\nAn ability ignored by this ability is only nullified while the move is being used.  For example, this Pokémon's moves can paralyze a Pokémon with limber, but Limber will activate and heal the paralysis immediately thereafter, and this Pokémon's spikes are not affected by this ability after they have been placed.\n\nWhen this Pokémon enters battle, all participating trainers are notified that it has this ability.\n\nThis ability functions identically to mold breaker and turboblaze."
+          }
+        ],
+        "generation": 5,
+        "evolutionChain": [
+          "zekrom"
+        ],
+        "flavorText": "Concealing itself in lightning clouds, it flies throughout the Unova region. It creates electricity in its tail.",
+        "aiDecision": {
+          "chosenName": "Zekrom",
+          "reason": "Top candidate margin 4.037101328334076 >= llmFallbackMargin 1.5",
+          "confidence": "high",
+          "source": "vector"
+        },
+        "usedLook": true,
+        "usedLore": true,
+        "retrievedContext": [
+          "lore: Zekrom, the Deep Black Pokémon, is a legendary creature that can scorch the world with its lightning. It is said that it will help those who seek to build a world of ideals.",
+          "look: A massive, draconic, legendary Pokémon with a black, metallic body. It has a large, generator-like tail. It represents the concept of ideals.",
+          "lore: After it has eaten up all the food in its territory, it moves to another area. Its two heads do not get along. Since their two heads do not get along and compete with each other for food, they always eat too much. The two heads do not get along. Whichever head eats more than the other gets to be the leader. While hunting for prey, Zweilous wanders its territory, its two heads often bickering over which way to go. Their two heads will fight each other over a single piece of food. Zweilous are covered in scars even without battling others.",
+          "lore: SALAMENCE came about as a result of a strong, long-held dream of growing wings. It is said that this powerful desire triggered a sudden mutation in this POKMONs cells, causing it to sprout its magnificent wings. By evolving into SALAMENCE, this POKMON finally realizes its long-held dream of growing wings. To express its joy, it flies and wheels all over the sky while spouting flames from its mouth. After many long years, its cellular structure underwent a sudden mutation to grow wings. When angered, it loses all thought and rampages out of control. It becomes uncontrollable if it is enraged. It destroys everything with shredding claws and fire. As a result of its long-held dream of flying, its cellular structure changed, and wings grew out. Its uncontrollable if enraged. It flies around spouting flames and scorching fields and mountains. Salamence came about as a result of a strong, long-held dream of growing wings. It is said that this powerful desire triggered a sudden mutation in this Pokmons cells, causing it to sprout its magnificent wings. By evolving into Salamence, this Pokmon finally realizes its long-held dream of growing wings. To express its joy, it flies and wheels all over the sky while spouting flames from its mouth. When angered, it loses all sense of itself and destroys everything around it. The destruction will continue until Salamence has tired itself out. It flies around on its wings, which have grown in at last. In its happiness, it gushes hot flames, burning up the fields it passes over. Overjoyed at finally being able to fly, it flies all over the place and usually doesnt land until its completely exhausted and needs to sleep. Thanks to its fervent wishes, the cells in its body finally mutated, and at last it has its hearts desirewings. Salamence is an unusual Pokmon in that it was able to evolve a body with wings just by constantly wishing to be able to fly. While basking in the joy of flight generally keeps this Pokmon in high spirits, Salamence turns into an uncontrollable menace if something angers it.",
+          "lore: Concealing itself in lightning clouds, it flies throughout the Unova region. It creates electricity in its tail. This Pokmon appears in legends. In its tail, it has a giant generator that creates electricity. This legendary Pokmon can scorch the world with lightning. It assists those who want to build an ideal world. When the interior part of its tail spins like a motor, Zekrom can generate many bolts of lightning to blast its surroundings. Mythology tells us that if people lose the righteousness in their hearts, their kingdoms will be razed by Zekroms lightning.",
+          "lore: It has a compassionate personality, but if it is angered, it completely destroys its surroundings with its intense breath. This Pokmon is friendly to people and loves children most of all. It comes from deep in the mountains to play with children it likes in town. If a child it has made friends with is bullied, Drampa will find the bullys house and burn it to the ground. It appears in towns and plays with the children. Drampa will protect kids when theyre in danger, so their moms dont have to worry. The mountains it calls home are nearly two miles in height. On rare occasions, it descends to play with the children living in the towns below. Drampa is a kind and friendly Pokmonup until its angered. When that happens, it stirs up a gale and flattens everything around."
+        ],
+        "diagnostics": {
+          "perSnippet": [
+            {
+              "id": "lorelook-644-lore",
+              "section": "lore",
+              "lexicalScore": 1,
+              "semanticScore": 7.837743671566115,
+              "finalScore": 14.140968843566114
+            },
+            {
+              "id": "lorelook-644-look",
+              "section": "lore",
+              "lexicalScore": 1,
+              "semanticScore": 7.5249667612320374,
+              "finalScore": 10.103867515232038
+            },
+            {
+              "id": "pokemon-634",
+              "section": "lore",
+              "lexicalScore": 1,
+              "semanticScore": 7.355663393188193,
+              "finalScore": 9.922230576188193
+            },
+            {
+              "id": "pokemon-373",
+              "section": "lore",
+              "lexicalScore": 1,
+              "semanticScore": 7.16964770966145,
+              "finalScore": 9.720758811661451
+            },
+            {
+              "id": "pokemon-644",
+              "section": "lore",
+              "lexicalScore": 1,
+              "semanticScore": 7.091150331243526,
+              "finalScore": 9.637006390243526
+            },
+            {
+              "id": "pokemon-780",
+              "section": "lore",
+              "lexicalScore": 1,
+              "semanticScore": 7.08646288645244,
+              "finalScore": 9.63140776845244
+            },
+            {
+              "id": "pokemon-380",
+              "section": "lore",
+              "lexicalScore": 1,
+              "semanticScore": 7.037221036815685,
+              "finalScore": 9.578688464815686
+            },
+            {
+              "id": "lorelook-885-look",
+              "section": "lore",
+              "lexicalScore": 1,
+              "semanticScore": 7.028751056763345,
+              "finalScore": 9.569686990763344
+            },
+            {
+              "id": "pokemon-334",
+              "section": "lore",
+              "lexicalScore": 1,
+              "semanticScore": 7.010962121957386,
+              "finalScore": 9.550440661957385
+            },
+            {
+              "id": "pokemon-635",
+              "section": "lore",
+              "lexicalScore": 1,
+              "semanticScore": 6.998678609579096,
+              "finalScore": 9.536777302579095
+            },
+            {
+              "id": "pokemon-148",
+              "section": "lore",
+              "lexicalScore": 1,
+              "semanticScore": 6.994302290567277,
+              "finalScore": 9.532665508567277
+            },
+            {
+              "id": "pokemon-859",
+              "section": "lore",
+              "lexicalScore": 1,
+              "semanticScore": 7.37273875262269,
+              "finalScore": 8.939335260622691
+            }
+          ]
+        }
+      }
+    },
+    {
+      "prompt": "a ghost that lives in a teapot",
+      "response": {
+        "id": 854,
+        "name": "sinistea",
+        "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/854.png",
+        "types": [
+          "ghost"
+        ],
+        "aiInsight": "Sinistea, the Black Tea Pokémon, is a Ghost-type that inhabits antique teapots.  It is the spirit of a deceased person and absorbs life force from those who drink its tea.  Authentic Sinistea are rare.\n",
+        "pokedexEntries": [
+          {
+            "version": "sword",
+            "text": "This Pokémon is said to have been born when a lonely spirit possessed a cold, leftover cup of tea.",
+            "entry": "This Pokémon is said to have been born when a lonely spirit possessed a cold, leftover cup of tea."
+          },
+          {
+            "version": "shield",
+            "text": "The teacup in which this Pokémon makes its home is a famous piece of antique tableware. Many forgeries are in circulation.",
+            "entry": "The teacup in which this Pokémon makes its home is a famous piece of antique tableware. Many forgeries are in circulation."
+          }
+        ],
+        "stats": [
+          {
+            "name": "HP",
+            "value": 40
+          },
+          {
+            "name": "Attack",
+            "value": 45
+          },
+          {
+            "name": "Defense",
+            "value": 45
+          },
+          {
+            "name": "Sp. Attack",
+            "value": 74
+          },
+          {
+            "name": "Sp. Defense",
+            "value": 54
+          },
+          {
+            "name": "Speed",
+            "value": 50
+          }
+        ],
+        "height": 1,
+        "weight": 2,
+        "abilities": [
+          {
+            "name": "weak-armor",
+            "description": "Whenever a physical move hits this Pokémon, its Speed rises one stage and its Defense falls one stage.\n\nThis ability triggers on every hit of a multiple-hit move.",
+            "isHidden": false,
+            "effect": "Whenever a physical move hits this Pokémon, its Speed rises one stage and its Defense falls one stage.\n\nThis ability triggers on every hit of a multiple-hit move."
+          },
+          {
+            "name": "cursed-body",
+            "description": "Moves that hit this Pokémon have a 30% chance of being Disabled afterward.",
+            "isHidden": true,
+            "effect": "Moves that hit this Pokémon have a 30% chance of being Disabled afterward."
+          }
+        ],
+        "generation": 8,
+        "evolutionChain": [
+          "sinistea",
+          "polteageist"
+        ],
+        "flavorText": "This Pokémon is said to have been born when a lonely spirit possessed a cold, leftover cup of tea.",
+        "aiDecision": {
+          "chosenName": "Sinistea",
+          "reason": "LLM reranker unavailable",
+          "confidence": "low",
+          "source": "llm-rerank"
+        },
+        "usedLook": true,
+        "usedLore": true,
+        "retrievedContext": [
+          "lore: Sinistea, the Black Tea Pokémon, is a creature that is said to be the spirit of a person who has passed away. It is known to absorb the life force of anyone who drinks from its teacup.",
+          "lore: Polteageist, the Black Tea Pokémon, is a creature that is known for its delicious, yet somewhat unsettling, tea. It is a very mischievous Pokémon that loves to play pranks.",
+          "lore: Poltchageist, the Matcha Pokémon, is a creature that is said to be the spirit of a tea master who was overly obsessed with perfection. It has the strange habit of sprinkling matcha powder on its victims, which absorbs their life force.",
+          "lore: Sinistcha, the Matcha Pokémon, is a creature that serves a special, cursed tea. It is a very dangerous Pokémon, but it is said that if it finds a Trainer it truly trusts, it will serve them a special tea that can heal any illness.",
+          "lore: This species lives in antique teapots. Most pots are forgeries, but on rare occasions, an authentic work is found. Leaving leftover black tea unattended is asking for this Pokmon to come along and pour itself into it, turning the tea into a new Polteageist.",
+          "look: The evolved form of Sinistea, Polteageist is a ghostly Pokémon that possesses a teapot. It also has two different forms: Phony and Antique."
+        ],
+        "diagnostics": {
+          "perSnippet": [
+            {
+              "id": "lorelook-854-lore",
+              "section": "lore",
+              "lexicalScore": 1,
+              "semanticScore": 7.92491110354892,
+              "finalScore": 14.23411593254892
+            },
+            {
+              "id": "lorelook-855-lore",
+              "section": "lore",
+              "lexicalScore": 1,
+              "semanticScore": 7.612928108328812,
+              "finalScore": 13.898391572328812
+            },
+            {
+              "id": "lorelook-1012-lore",
+              "section": "lore",
+              "lexicalScore": 1,
+              "semanticScore": 7.126765542278275,
+              "finalScore": 13.374845271278275
+            },
+            {
+              "id": "lorelook-1013-lore",
+              "section": "lore",
+              "lexicalScore": 1,
+              "semanticScore": 6.8101991992576645,
+              "finalScore": 13.034083078257666
+            },
+            {
+              "id": "pokemon-855",
+              "section": "lore",
+              "lexicalScore": 1,
+              "semanticScore": 8.317732480937302,
+              "finalScore": 10.957428780937303
+            },
+            {
+              "id": "lorelook-855-look",
+              "section": "lore",
+              "lexicalScore": 1,
+              "semanticScore": 7.672622476092403,
+              "finalScore": 10.262981508092404
+            },
+            {
+              "id": "lorelook-1012-look",
+              "section": "lore",
+              "lexicalScore": 1,
+              "semanticScore": 7.357942863772763,
+              "finalScore": 9.923519476772762
+            },
+            {
+              "id": "pokemon-854",
+              "section": "lore",
+              "lexicalScore": 1,
+              "semanticScore": 8.164123880377959,
+              "finalScore": 9.792254256377959
+            },
+            {
+              "id": "lorelook-854-look",
+              "section": "lore",
+              "lexicalScore": 1,
+              "semanticScore": 7.08728306242856,
+              "finalScore": 9.632126378428561
+            },
+            {
+              "id": "lorelook-1013-look",
+              "section": "lore",
+              "lexicalScore": 1,
+              "semanticScore": 7.033024615421542,
+              "finalScore": 9.573673075421542
+            },
+            {
+              "id": "pokemon-1012",
+              "section": "lore",
+              "lexicalScore": 1,
+              "semanticScore": 6.845949502682738,
+              "finalScore": 9.372539134682738
+            },
+            {
+              "id": "pokemon-1013",
+              "section": "lore",
+              "lexicalScore": 1,
+              "semanticScore": 7.609940676869289,
+              "finalScore": 9.19551518486929
+            }
+          ]
+        }
+      }
+    },
+    {
+      "prompt": "a small electric mouse that is friendly",
+      "response": {
+        "id": 921,
+        "name": "pawmi",
+        "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/921.png",
+        "types": [
+          "electric"
+        ],
+        "aiInsight": "Couldn't reach the AI model — basic match explanation: pawmi appears to match the query because lore: Pawmi, the Mouse Pokémon, is a creature that can generate electricity in its cheek pouches and then discharge it from the pads on its front paws. lore: Pichu, the Tiny Mouse Pokémon, is the pre-",
+        "pokedexEntries": [
+          {
+            "version": "scarlet",
+            "text": "It has underdeveloped electric sacs on its cheeks. These sacs can produce electricity only if Pawmi rubs them furiously with the pads on its forepaws.",
+            "entry": "It has underdeveloped electric sacs on its cheeks. These sacs can produce electricity only if Pawmi rubs them furiously with the pads on its forepaws."
+          },
+          {
+            "version": "violet",
+            "text": "The pads of its paws are electricity-discharging organs. Pawmi fires electricity from its forepaws while standing unsteadily on its hind legs.",
+            "entry": "The pads of its paws are electricity-discharging organs. Pawmi fires electricity from its forepaws while standing unsteadily on its hind legs."
+          }
+        ],
+        "stats": [
+          {
+            "name": "HP",
+            "value": 45
+          },
+          {
+            "name": "Attack",
+            "value": 50
+          },
+          {
+            "name": "Defense",
+            "value": 20
+          },
+          {
+            "name": "Sp. Attack",
+            "value": 40
+          },
+          {
+            "name": "Sp. Defense",
+            "value": 25
+          },
+          {
+            "name": "Speed",
+            "value": 60
+          }
+        ],
+        "height": 3,
+        "weight": 25,
+        "abilities": [
+          {
+            "name": "static",
+            "description": "Whenever a move makes contact with this Pokémon, the move's user has a 30% chance of being paralyzed.\n\nPokémon that are immune to electric-type moves can still be paralyzed by this ability.\n\nOverworld: If the lead Pokémon has this ability, there is a 50% chance that encounters will be with an electric Pokémon, if applicable.",
+            "isHidden": false,
+            "effect": "Whenever a move makes contact with this Pokémon, the move's user has a 30% chance of being paralyzed.\n\nPokémon that are immune to electric-type moves can still be paralyzed by this ability.\n\nOverworld: If the lead Pokémon has this ability, there is a 50% chance that encounters will be with an electric Pokémon, if applicable."
+          },
+          {
+            "name": "natural-cure",
+            "description": "This Pokémon is cured of any major status ailment when it is switched out for another Pokémon.\n\nIf this ability is acquired during battle, the Pokémon is cured upon leaving battle before losing the temporary ability.",
+            "isHidden": false,
+            "effect": "This Pokémon is cured of any major status ailment when it is switched out for another Pokémon.\n\nIf this ability is acquired during battle, the Pokémon is cured upon leaving battle before losing the temporary ability."
+          },
+          {
+            "name": "iron-fist",
+            "description": "Moves flagged as being punch-based have 1.2× their base power for this Pokémon.\n\nsucker punch is not flagged as punch-based; its original, Japanese name only means \"surprise attack\".",
+            "isHidden": true,
+            "effect": "Moves flagged as being punch-based have 1.2× their base power for this Pokémon.\n\nsucker punch is not flagged as punch-based; its original, Japanese name only means \"surprise attack\"."
+          }
+        ],
+        "generation": 9,
+        "evolutionChain": [
+          "pawmi",
+          "pawmo",
+          "pawmot"
+        ],
+        "flavorText": "It has underdeveloped electric sacs on its cheeks. These sacs can produce electricity only if Pawmi rubs them furiously with the pads on its forepaws.",
+        "aiDecision": {
+          "chosenName": "Pawmi",
+          "reason": "LLM reranker unavailable",
+          "confidence": "low",
+          "source": "llm-rerank"
+        },
+        "usedLook": false,
+        "usedLore": true,
+        "retrievedContext": [
+          "lore: Pawmi, the Mouse Pokémon, is a creature that can generate electricity in its cheek pouches and then discharge it from the pads on its front paws.",
+          "lore: Pichu, the Tiny Mouse Pokémon, is the pre-evolved form of Pikachu. It is not yet skilled at storing electricity, and it will often accidentally discharge a shock if it is happy, excited, or startled. It is a very playful and curious Pokémon, but it cannot handle large amounts of electricity without shocking itself.",
+          "lore: Pawmo, the Mouse Pokémon, is a creature that has developed a unique fighting style that combines its electrical abilities with its powerful punches.",
+          "lore: Raichu, the Mouse Pokémon, can store even more electricity than Pikachu. Its electrical shocks can reach up to 100,000 volts, powerful enough to knock out a Dragonite. Its long tail acts as a ground, protecting it from its own powerful electrical discharges. It can become aggressive if it stores too much electricity.",
+          "lore: If static elec tricity builds in its body, its fleece doubles in volume. Touching it will shock you. Its fleece grows continually. In the summer, the fleece is fully shed, but it grows back in a week. It stores lots of air in its soft fur, allowing it to stay cool in summer and warm in winter. MAREEPs fluffy coat of wool rubs together and builds a static charge. The more static electricity is charged, the more brightly the lightbulb at the tip of its tail grows. Its fluffy wool rubs together and builds a static charge. The more energy is charged, the more brightly the lightbulb at the tip of its tail glows. If static electricity builds in its body, its fleece doubles in volume. Touching it will shock you. Its fluffy coat swells to double when static electricity builds up. Touching it can be shocking. When cold weather increases static electricity, its wool doubles in size and the tip of its tail glows slightly. Mareeps fluffy coat of wool rubs together and builds a static charge. The more static electricity is charged, the more brightly the lightbulb at the tip of its tail glows. Clothing made from Mareeps fleece is easily charged with static electricity, so a special process is used on it. Rubbing its fleece generates electricity. Youll want to pet it because its cute, but if you use your bare hand, youll get a painful shock.",
+          "lore: It is not yet skilled at storing electricity. It may send out a jolt if amused or startled. Despite its small size, it can zap even adult humans. However, if it does so, it also surprises itself. It is unskilled at storing electric power. Any kind of shock causes it to discharge energy spontaneously. PICHU charges itself with electricity more easily on days with thunderclouds or when the air is very dry. You can hear the crackling of static electricity coming off this POKMON. When PICHU plays with others, it may short out electricity with another PICHU, creating a shower of sparks. In that event, this POKMON will begin crying, startled by the flash of sparks. It is still inept at retaining electricity. When it is startled, it discharges power accidentally. It gets better at holding power as it grows older. The electric pouches on its cheeks are still small. They cannot store much electricity yet. It plays with others by touching tails and setting off sparks. This appears to be a test of courage. The electric sacs in its cheeks are small. If even a little electricity leaks, it becomes shocked. Pichu charges itself with electricity more easily on days with thunderclouds or when the air is very dry. You can hear the crackling of static electricity coming off this Pokmon. When Pichu plays with others, it may short out electricity with another Pichu, creating a shower of sparks. In that event, this Pokmon will begin crying, startled by the flash of sparks. It is not yet skilled at controlling electricity. If you take your eyes off it, it may shock itself. Despite this Pokmons cute appearance, those who want to live with one should prepare to be on the receiving end of its electric jolts. It still cant use electricity well. When its surprised or excited, it discharges electricity unintentionally. It has electric sacs in its cheeks. When theyre fully charged, Pichu plays very energetically. Pichu stores electricity in the sacs on its cheeks but discharges it inadvertently when agitated or excited. Being yet immature, the Pokmons handling of electricity is rather inept."
+        ],
+        "diagnostics": {
+          "perSnippet": [
+            {
+              "id": "lorelook-921-lore",
+              "section": "lore",
+              "lexicalScore": 1,
+              "semanticScore": 6.727222083523662,
+              "finalScore": 12.944773446523662
+            },
+            {
+              "id": "lorelook-172-lore",
+              "section": "lore",
+              "lexicalScore": 1,
+              "semanticScore": 6.7172315096584,
+              "finalScore": 12.933311590658398
+            },
+            {
+              "id": "lorelook-922-lore",
+              "section": "lore",
+              "lexicalScore": 1,
+              "semanticScore": 6.407100614716547,
+              "finalScore": 12.599916347716547
+            },
+            {
+              "id": "lorelook-26-lore",
+              "section": "lore",
+              "lexicalScore": 1,
+              "semanticScore": 6.225316826449091,
+              "finalScore": 12.40382422644909
+            },
+            {
+              "id": "pokemon-179",
+              "section": "lore",
+              "lexicalScore": 1,
+              "semanticScore": 6.6208868591245,
+              "finalScore": 9.1300494041245
+            },
+            {
+              "id": "pokemon-172",
+              "section": "lore",
+              "lexicalScore": 1,
+              "semanticScore": 6.573024137121905,
+              "finalScore": 9.078115029121905
+            },
+            {
+              "id": "pokemon-921",
+              "section": "lore",
+              "lexicalScore": 1,
+              "semanticScore": 6.282261625291676,
+              "finalScore": 8.765372828291676
+            },
+            {
+              "id": "lorelook-923-look",
+              "section": "lore",
+              "lexicalScore": 1,
+              "semanticScore": 6.184952739365409,
+              "finalScore": 8.66139111236541
+            },
+            {
+              "id": "lorelook-921-look",
+              "section": "lore",
+              "lexicalScore": 1,
+              "semanticScore": 6.119252941556997,
+              "finalScore": 8.589825383556997
+            },
+            {
+              "id": "pokemon-25",
+              "section": "lore",
+              "lexicalScore": 1,
+              "semanticScore": 6.0812633477737075,
+              "finalScore": 8.549045040773708
+            },
+            {
+              "id": "pokemon-312",
+              "section": "lore",
+              "lexicalScore": 1,
+              "semanticScore": 6.065977810850852,
+              "finalScore": 8.533223955850852
+            },
+            {
+              "id": "pokemon-209",
+              "section": "lore",
+              "lexicalScore": 0,
+              "semanticScore": 6.122778149527714,
+              "finalScore": 7.593950869527714
+            }
+          ]
+        }
+      }
+    },
+    {
+      "prompt": "the final evolution of the fire starter from Kanto",
+      "response": {
+        "id": 4,
+        "name": "charmander",
+        "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/4.png",
+        "types": [
+          "fire"
+        ],
+        "aiInsight": "Couldn't reach the AI model — basic match explanation: charmander appears to match the query because lore: Obviously prefers hot places. When it rains, steam is said to spout from the tip of its tail. The flame at the tip of its tail makes a sound as it burns. You can only hear it in quiet places. Th",
+        "pokedexEntries": [
+          {
+            "version": "red",
+            "text": "Obviously prefers hot places. When it rains, steam is said to spout from the tip of its tail.",
+            "entry": "Obviously prefers hot places. When it rains, steam is said to spout from the tip of its tail."
+          },
+          {
+            "version": "blue",
+            "text": "Obviously prefers hot places. When it rains, steam is said to spout from the tip of its tail.",
+            "entry": "Obviously prefers hot places. When it rains, steam is said to spout from the tip of its tail."
+          },
+          {
+            "version": "yellow",
+            "text": "The flame at the tip of its tail makes a sound as it burns. You can only hear it in quiet places.",
+            "entry": "The flame at the tip of its tail makes a sound as it burns. You can only hear it in quiet places."
+          }
+        ],
+        "stats": [
+          {
+            "name": "HP",
+            "value": 39
+          },
+          {
+            "name": "Attack",
+            "value": 52
+          },
+          {
+            "name": "Defense",
+            "value": 43
+          },
+          {
+            "name": "Sp. Attack",
+            "value": 60
+          },
+          {
+            "name": "Sp. Defense",
+            "value": 50
+          },
+          {
+            "name": "Speed",
+            "value": 65
+          }
+        ],
+        "height": 6,
+        "weight": 85,
+        "abilities": [
+          {
+            "name": "blaze",
+            "description": "When this Pokémon has 1/3 or less of its HP remaining, its fire-type moves inflict 1.5× as much regular damage.",
+            "isHidden": false,
+            "effect": "When this Pokémon has 1/3 or less of its HP remaining, its fire-type moves inflict 1.5× as much regular damage."
+          },
+          {
+            "name": "solar-power",
+            "description": "During strong sunlight, this Pokémon has 1.5× its Special Attack but takes 1/8 of its maximum HP in damage after each turn.",
+            "isHidden": true,
+            "effect": "During strong sunlight, this Pokémon has 1.5× its Special Attack but takes 1/8 of its maximum HP in damage after each turn."
+          }
+        ],
+        "generation": 1,
+        "evolutionChain": [
+          "charmander",
+          "charmeleon",
+          "charizard"
+        ],
+        "flavorText": "Obviously prefers hot places. When it rains, steam is said to spout from the tip of its tail.",
+        "aiDecision": {
+          "chosenName": "charmander",
+          "reason": "Top candidate margin Infinity >= llmFallbackMargin 1.5",
+          "confidence": "high",
+          "source": "vector"
+        },
+        "usedLook": false,
+        "usedLore": true,
+        "retrievedContext": [
+          "lore: Obviously prefers hot places. When it rains, steam is said to spout from the tip of its tail. The flame at the tip of its tail makes a sound as it burns. You can only hear it in quiet places. The flame on its tail shows the strength of its life force. If it is weak, the flame also burns weakly. The flame on its tail indicates CHARMANDERs life force. If it is healthy, the flame burns brightly. If its healthy, the flame on the tip of its tail will burn vigor ously, even if it gets a bit wet. The flame that burns at the tip of its tail is an indication of its emotions. The flame wavers when CHARMANDER is enjoying itself. If the POKMON becomes enraged, the flame burns fiercely. The flame that burns at the tip of its tail is an indication of its emotions. The flame wavers when CHARMANDER is happy, and blazes when it is enraged. From the time it is born, a flame burns at the tip of its tail. Its life would end if the flame were to go out. It has a preference for hot things. When it rains, steam is said to spout from the tip of its tail. The fire on the tip of its tail is a measure of its life. If healthy, its tail burns intensely. The flame on its tail indicates CHARMANDERs life force. If it is healthy, the flame burns brightly. The flame on its tail indicates Charmanders life force. If it is healthy, the flame burns brightly. The flame that burns at the tip of its tail is an indication of its emotions. The flame wavers when Charmander is enjoying itself. If the Pokmon becomes enraged, the flame burns fiercely."
+        ],
+        "diagnostics": {
+          "perSnippet": [
+            {
+              "id": "pokemon-4",
+              "section": "lore",
+              "lexicalScore": 7,
+              "semanticScore": 7.706688346503992,
+              "finalScore": 16.299534144503994
+            }
+          ]
+        }
+      }
+    },
+    {
+      "prompt": "a legendary Pokémon that controls time",
+      "response": {
+        "message": "Query contains invalid characters",
+        "code": "INVALID_QUERY"
+      }
+    },
+    {
+      "prompt": "a cute water turtle that likes beaches",
+      "response": {
+        "id": 8,
+        "name": "wartortle",
+        "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/8.png",
+        "types": [
+          "water"
+        ],
+        "aiInsight": "Couldn't reach the AI model — basic match explanation: wartortle appears to match the query because lore: Often hides in water to stalk unwary prey. For swimming fast, it moves its ears to maintain balance. When tapped, this POKMON will pull in its head, but its tail will still stick out a little bi",
+        "pokedexEntries": [
+          {
+            "version": "red",
+            "text": "Often hides in water to stalk unwary prey. For swimming fast, it moves its ears to maintain balance.",
+            "entry": "Often hides in water to stalk unwary prey. For swimming fast, it moves its ears to maintain balance."
+          },
+          {
+            "version": "blue",
+            "text": "Often hides in water to stalk unwary prey. For swimming fast, it moves its ears to maintain balance.",
+            "entry": "Often hides in water to stalk unwary prey. For swimming fast, it moves its ears to maintain balance."
+          },
+          {
+            "version": "yellow",
+            "text": "When tapped, this POKéMON will pull in its head, but its tail will still stick out a little bit.",
+            "entry": "When tapped, this POKéMON will pull in its head, but its tail will still stick out a little bit."
+          }
+        ],
+        "stats": [
+          {
+            "name": "HP",
+            "value": 59
+          },
+          {
+            "name": "Attack",
+            "value": 63
+          },
+          {
+            "name": "Defense",
+            "value": 80
+          },
+          {
+            "name": "Sp. Attack",
+            "value": 65
+          },
+          {
+            "name": "Sp. Defense",
+            "value": 80
+          },
+          {
+            "name": "Speed",
+            "value": 58
+          }
+        ],
+        "height": 10,
+        "weight": 225,
+        "abilities": [
+          {
+            "name": "torrent",
+            "description": "When this Pokémon has 1/3 or less of its HP remaining, its water-type moves inflict 1.5× as much regular damage.",
+            "isHidden": false,
+            "effect": "When this Pokémon has 1/3 or less of its HP remaining, its water-type moves inflict 1.5× as much regular damage."
+          },
+          {
+            "name": "rain-dish",
+            "description": "This Pokémon heals for 1/16 of its maximum HP after each turn during rain.",
+            "isHidden": true,
+            "effect": "This Pokémon heals for 1/16 of its maximum HP after each turn during rain."
+          }
+        ],
+        "generation": 1,
+        "evolutionChain": [
+          "squirtle",
+          "wartortle",
+          "blastoise"
+        ],
+        "flavorText": "Often hides in water to stalk unwary prey. For swimming fast, it moves its ears to maintain balance.",
+        "aiDecision": {
+          "chosenName": "wartortle",
+          "reason": "LLM reranker unavailable",
+          "confidence": "low",
+          "source": "llm-rerank"
+        },
+        "usedLook": true,
+        "usedLore": true,
+        "retrievedContext": [
+          "lore: Often hides in water to stalk unwary prey. For swimming fast, it moves its ears to maintain balance. When tapped, this POKMON will pull in its head, but its tail will still stick out a little bit. It is recognized as a symbol of longevity. If its shell has algae on it, that WARTORTLE is very old. It cleverly con trols its furry ears and tail to maintain its balance while swimming. Its long, furry tail is a symbol of longevity, making it quite popular among older people. Its tail is large and covered with a rich, thick fur. The tail becomes increasingly deeper in color as WARTORTLE ages. The scratches on its shell are evidence of this POKMONs toughness as a battler. Its large tail is covered with rich, thick fur that deepens in color with age. The scratches on its shell are evidence of this POKMONs toughness in battle. This POKMON is very popular as a pet. Its fur-covered tail is a symbol of its longevity. It often hides in water to stalk unwary prey. For fast swimming, it moves its ears to maintain balance. It is said to live 10,000 years. Its furry tail is popular as a symbol of longevity. It is a well-established symbol of longevity. If its shell has algae on it, that WARTORTLE is very old. It cleverly controls its furry ears and tail to maintain its balance while swimming. When tapped, this Pokmon will pull in its head, but its tail will still stick out a little bit. Its tail is large and covered with a rich, thick fur. The tail becomes increasingly deeper in color as Wartortle ages. The scratches on its shell are evidence of this Pokmons toughness as a battler. When tapped on its head, this Pokmon will pull it in, but its tail will still stick out a little bit. It is recognized as a symbol of longevity. If its shell has algae on it, that Wartortle is very old.",
+          "lore: Its covered in a slime that keeps its skin moist, allowing it to stay on land for days without drying up. It lives in shallow seas, such as areas near a beach. It can eject its internal organs, which it uses to engulf its prey or battle enemies. These Pokmon line the beaches. The sticky mucous that covers their bodies can be used to soothe sunburned skin. How convenient! The tradition known as Pyukumuku chucking started from the custom of throwing Pyukumuku back into the sea after they wash onshore. Its entire body is covered in its own slime. If you accidentally step on one, youll slip, and it will get mad and smack you! It lives in warm, shallow waters. If it encounters a foe, it will spit out its internal organs as a means to punch them.",
+          "lore: Its colors and shapes differ from region to region. In the Sinnoh region, two types are confirmed. It lives along bodies of water. Its body shape has changed to suit its habitat. Beware of pushing strongly on its squishy body, as it makes a mysterious purple fluid ooze out. Its shape and coloration vary, depending on its habitat. For the most part, it makes its home along the seashore. Its color and form differ according to its habitat and the quality of its food. Purple mucus sticks to the hands of anyone who touches it. Take care, as the substance is troublesome to wash off. While they normally live in the sea, they can function on land, too, until their skin dries out. When it senses danger, a purple liquid oozes out of it. The liquid is thought to be something like greasy sweat. This Pokmons habitat shapes its physique. According to some theories, life in warm ocean waters causes this variation to develop. Subjecting this Pokmon to a strong force causes it to secrete a strange purple fluid. Though harmless, the fluid is awfully sticky. Found in abundance on seashores bordering warm waters. Shellos are unexpectedly friendly and will crawl toward any person they see. Take care not to get coated in mucus!",
+          "lore: A friendly Pokmon that captures the subtle flows of seawater using its two antennae. Scientists discovered that the distinctive patterns on its back differ by region. People organize tours to see this Pokmon frolic and skim the tops of waves with REMORAID. When it swims close to the surface of the ocean, people aboard ships are able to observe the pattern on its back. People organize tours to see this Pokmon frolic and skim the tops of waves with Remoraid. The pattern on its back varies by region. It often swims in a school of Remoraid. Its highly friendly and easily tamed. Tours that take people swimming with Mantyke are a super-popular beach activity. Mantyke are friendly toward people and will approach boats closely. The patterns on their backs differ depending on their habitat. Mantyke living in Galar seem to be somewhat sluggish. The colder waters of the seas in this region may be the cause. It swims along with a school of Remoraid, and theyll all fight together to repel attackers. Though ball-like in shape, this Pokmon is a proficient swimmer. I have discovered that if a Mantyke spends much time with schools of Remoraid, it will eventually achieve evolution.",
+          "lore: This carefree POKMON has an easy-going nature. While swimming, it always bumps into boat hulls. Due to its relaxed and carefree atti tude, it often bumps its head on boulders and boat hulls as it swims. Its body is always slimy. It often bangs its head on the river bottom as it swims but seems not to care. QUAGSIRE hunts for food by leaving its mouth wide open in water and waiting for its prey to blunder in unaware. Because the POKMON does not move, it does not get very hungry. A QUAGSIRE hunts by leaving its mouth wide open in water and waiting for its prey to blunder in. Because it doesnt move, it does not get very hungry. Due to its relaxed and carefree attitude, it often bumps its head on boulders and boat hulls as it swims. This carefree POKMON has an easygoing nature. While swimming, it always bumps into boat hulls. It has a sluggish nature. It lies at the rivers bottom, waiting for prey to stray into its mouth. A dim-witted Pokmon. It doesnt care if it bumps its head into boats or rocks while swimming. It has an easygoing nature. It doesnt care if it bumps its head on boats and boulders while swimming. This carefree Pokmon has an easy-going nature. While swimming, it always bumps into boat hulls. This carefree Pokmon has an easygoing nature. While swimming, it always bumps into boat hulls. Quagsire hunts for food by leaving its mouth wide open in water and waiting for its prey to blunder in unaware. Because the Pokmon does not move, it does not get very hungry.",
+          "look: A small, bipedal turtle-like Pokémon with a light blue body, a cream-colored underside, and a long, curled tail. Its most prominent feature is its hard, brown shell, which has a white ridge. It has large, reddish-brown eyes and a slightly hooked upper jaw. Its shell provides excellent protection."
+        ],
+        "diagnostics": {
+          "perSnippet": [
+            {
+              "id": "pokemon-8",
+              "section": "lore",
+              "lexicalScore": 1,
+              "semanticScore": 7.26258703190838,
+              "finalScore": 9.82194187390838
+            },
+            {
+              "id": "pokemon-771",
+              "section": "lore",
+              "lexicalScore": 1,
+              "semanticScore": 7.172402298934893,
+              "finalScore": 9.724212920934892
+            },
+            {
+              "id": "pokemon-422",
+              "section": "lore",
+              "lexicalScore": 1,
+              "semanticScore": 7.064473531986194,
+              "finalScore": 9.607634566986194
+            },
+            {
+              "id": "pokemon-458",
+              "section": "lore",
+              "lexicalScore": 1,
+              "semanticScore": 7.021738577241426,
+              "finalScore": 9.561806905241426
+            },
+            {
+              "id": "pokemon-195",
+              "section": "lore",
+              "lexicalScore": 1,
+              "semanticScore": 7.0189705079961575,
+              "finalScore": 9.558429795996158
+            },
+            {
+              "id": "lorelook-7-look",
+              "section": "lore",
+              "lexicalScore": 1,
+              "semanticScore": 6.946367406453459,
+              "finalScore": 9.480556690453458
+            },
+            {
+              "id": "pokemon-80",
+              "section": "lore",
+              "lexicalScore": 1,
+              "semanticScore": 6.940672454693262,
+              "finalScore": 9.474591848693262
+            },
+            {
+              "id": "pokemon-7",
+              "section": "lore",
+              "lexicalScore": 1,
+              "semanticScore": 6.914587434662064,
+              "finalScore": 9.446733649662065
+            },
+            {
+              "id": "pokemon-370",
+              "section": "lore",
+              "lexicalScore": 1,
+              "semanticScore": 6.896995177330291,
+              "finalScore": 9.426906099330292
+            },
+            {
+              "id": "pokemon-226",
+              "section": "lore",
+              "lexicalScore": 1,
+              "semanticScore": 6.8840426712541145,
+              "finalScore": 9.413522890254114
+            },
+            {
+              "id": "pokemon-320",
+              "section": "lore",
+              "lexicalScore": 1,
+              "semanticScore": 6.881092029208256,
+              "finalScore": 9.410704093208256
+            },
+            {
+              "id": "lorelook-565-look",
+              "section": "lore",
+              "lexicalScore": 1,
+              "semanticScore": 6.86414906466718,
+              "finalScore": 9.392688722667181
+            }
+          ]
+        }
+      }
+    },
+    {
+      "prompt": "a Pokémon that is known for healing others",
+      "response": {
+        "message": "Query contains invalid characters",
+        "code": "INVALID_QUERY"
+      }
+    },
+    {
+      "prompt": "a bat-like dragon that hunts at night",
+      "response": {
+        "id": 887,
+        "name": "dragapult",
+        "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/887.png",
+        "types": [
+          "dragon",
+          "ghost"
+        ],
+        "aiInsight": "Couldn't reach the AI model — basic match explanation: dragapult appears to match the query because lore: Dragapult, the Stealth Pokémon, is a creature that can fly at speeds of over 120 miles per hour. It is a very powerful and dangerous Pokémon that will not hesitate to attack anything that moves.",
+        "pokedexEntries": [
+          {
+            "version": "sword",
+            "text": "When it isn’t battling, it keeps Dreepy in the holes on its horns. Once a fight starts, it launches the Dreepy like supersonic missiles.",
+            "entry": "When it isn’t battling, it keeps Dreepy in the holes on its horns. Once a fight starts, it launches the Dreepy like supersonic missiles."
+          },
+          {
+            "version": "shield",
+            "text": "Apparently the Dreepy inside Dragapult’s horns eagerly look forward to being launched out at Mach speeds.",
+            "entry": "Apparently the Dreepy inside Dragapult’s horns eagerly look forward to being launched out at Mach speeds."
+          }
+        ],
+        "stats": [
+          {
+            "name": "HP",
+            "value": 88
+          },
+          {
+            "name": "Attack",
+            "value": 120
+          },
+          {
+            "name": "Defense",
+            "value": 75
+          },
+          {
+            "name": "Sp. Attack",
+            "value": 100
+          },
+          {
+            "name": "Sp. Defense",
+            "value": 75
+          },
+          {
+            "name": "Speed",
+            "value": 142
+          }
+        ],
+        "height": 30,
+        "weight": 500,
+        "abilities": [
+          {
+            "name": "clear-body",
+            "description": "This Pokémon cannot have its stats lowered by other Pokémon.\n\nThis ability does not prevent any stat losses other than stat modifiers, such as the Speed cut from paralysis.  This Pokémon can still be passed negative stat modifiers through guard swap, heart swap, or power swap.\n\nThis ability functions identically to white smoke in battle.",
+            "isHidden": false,
+            "effect": "This Pokémon cannot have its stats lowered by other Pokémon.\n\nThis ability does not prevent any stat losses other than stat modifiers, such as the Speed cut from paralysis.  This Pokémon can still be passed negative stat modifiers through guard swap, heart swap, or power swap.\n\nThis ability functions identically to white smoke in battle."
+          },
+          {
+            "name": "infiltrator",
+            "description": "This Pokémon's moves ignore light screen, reflect, and safeguard.",
+            "isHidden": false,
+            "effect": "This Pokémon's moves ignore light screen, reflect, and safeguard."
+          },
+          {
+            "name": "cursed-body",
+            "description": "Moves that hit this Pokémon have a 30% chance of being Disabled afterward.",
+            "isHidden": true,
+            "effect": "Moves that hit this Pokémon have a 30% chance of being Disabled afterward."
+          }
+        ],
+        "generation": 8,
+        "evolutionChain": [
+          "dreepy",
+          "drakloak",
+          "dragapult"
+        ],
+        "flavorText": "When it isn’t battling, it keeps Dreepy in the holes on its horns. Once a fight starts, it launches the Dreepy like supersonic missiles.",
+        "aiDecision": {
+          "chosenName": "Dragapult",
+          "reason": "LLM reranker unavailable",
+          "confidence": "low",
+          "source": "llm-rerank"
+        },
+        "usedLook": true,
+        "usedLore": true,
+        "retrievedContext": [
+          "lore: Dragapult, the Stealth Pokémon, is a creature that can fly at speeds of over 120 miles per hour. It is a very powerful and dangerous Pokémon that will not hesitate to attack anything that moves.",
+          "lore: Golbat, the Bat Pokémon, is a vampiric creature. It has a voracious appetite for blood and can drink over 10 ounces of it in one sitting. It uses its sharp fangs to pierce the hide of its prey and drain its blood. It can sometimes become so engorged with blood that it becomes too heavy to fly properly.",
+          "lore: Crobat, the Bat Pokémon, is the final evolution of Zubat. The addition of a second pair of wings has made it an incredibly fast and silent flyer. It can fly so quietly that it can approach its prey without being detected at all. It is a very efficient hunter, capable of draining its victim's blood in an instant.",
+          "lore: They live in pitch-black caves. Their enormous ears can emit ultrasonic waves of 200,000 hertz. Even a robust wrestler will become dizzy and unable to stand when exposed to its 200,000-hertz ultrasonic waves. Fruits are its favorite foods. This gourmet carefully picks out just the ripe ones using its sonar. It flies around in search of fruit to eat. It uses ultrasonic waves to detect which fruits are ripe. After nightfall, they emerge from the caves they nest in during the day. Using their ultrasonic waves, they go on the hunt for ripened fruit. No wavelength of sound is beyond Noibats ability to produce. The ultrasonic waves it generates can overcome much larger Pokmon.",
+          "lore: They fly around on moonless nights and attack careless prey. Nothing can beat them in a battle in the dark. The ultrasonic waves it emits from its ears can reduce a large boulder to pebbles. It swoops out of the dark to attack. Although it has a violent disposition, if you give it a nice ripe fruit that it loves, Noivern will suddenly become tame. This hot-blooded Pokmon attacks anything it sees with ultrasonic waves that can crush boulders. Aggressive and cruel, this Pokmon will ruthlessly torment enemies that are helpless in the dark. Flying through the darkness, it weakens enemies with ultrasonic waves that could crush stone. Its fangs finish the fight.",
+          "look: A small, bat-like Pokémon with two massive, speaker-like ears."
+        ],
+        "diagnostics": {
+          "perSnippet": [
+            {
+              "id": "lorelook-887-lore",
+              "section": "lore",
+              "lexicalScore": 1,
+              "semanticScore": 7.4867551263268295,
+              "finalScore": 13.762834197326828
+            },
+            {
+              "id": "lorelook-42-lore",
+              "section": "lore",
+              "lexicalScore": 0,
+              "semanticScore": 7.639401297992864,
+              "finalScore": 12.927371196992862
+            },
+            {
+              "id": "lorelook-169-lore",
+              "section": "lore",
+              "lexicalScore": 0,
+              "semanticScore": 7.400314171860735,
+              "finalScore": 12.669044171860737
+            },
+            {
+              "id": "pokemon-714",
+              "section": "lore",
+              "lexicalScore": 1,
+              "semanticScore": 7.906526100037208,
+              "finalScore": 10.514393579037208
+            },
+            {
+              "id": "pokemon-715",
+              "section": "lore",
+              "lexicalScore": 1,
+              "semanticScore": 7.833393477775304,
+              "finalScore": 10.435807608775304
+            },
+            {
+              "id": "lorelook-714-look",
+              "section": "lore",
+              "lexicalScore": 1,
+              "semanticScore": 7.479935425827074,
+              "finalScore": 10.055652874827075
+            },
+            {
+              "id": "pokemon-169",
+              "section": "lore",
+              "lexicalScore": 0,
+              "semanticScore": 8.103030735565259,
+              "finalScore": 9.726369375565259
+            },
+            {
+              "id": "pokemon-42",
+              "section": "lore",
+              "lexicalScore": 0,
+              "semanticScore": 8.023403517620437,
+              "finalScore": 9.640712193620438
+            },
+            {
+              "id": "pokemon-49",
+              "section": "lore",
+              "lexicalScore": 0,
+              "semanticScore": 7.802081885669921,
+              "finalScore": 9.402052285669921
+            },
+            {
+              "id": "pokemon-164",
+              "section": "lore",
+              "lexicalScore": 0,
+              "semanticScore": 7.54069181336919,
+              "finalScore": 9.12031604936919
+            },
+            {
+              "id": "pokemon-48",
+              "section": "lore",
+              "lexicalScore": 0,
+              "semanticScore": 7.507788642443799,
+              "finalScore": 9.0858970724438
+            },
+            {
+              "id": "pokemon-472",
+              "section": "lore",
+              "lexicalScore": 0,
+              "semanticScore": 7.410745677129045,
+              "finalScore": 7.980701324129045
+            }
+          ]
+        }
+      }
+    }
+  ]
+}
