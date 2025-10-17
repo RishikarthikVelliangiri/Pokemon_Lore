@@ -1,6 +1,6 @@
 // Application constants
 export const APP_CONFIG = {
-  name: 'Pokémon Lore Engine',
+  name: 'LoreDex',
   description: 'Discover Pokémon through natural language queries',
   version: '1.0.0',
   maxQueryLength: 500,
