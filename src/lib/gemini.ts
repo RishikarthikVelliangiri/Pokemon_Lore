@@ -26,6 +26,8 @@ const dedupeModels = (models: string[]): string[] => {
 const TEXT_MODEL_CANDIDATES = dedupeModels([
   ...parseModelList(process.env.GOOGLE_GEMINI_TEXT_MODELS),
   ...parseModelList(process.env.GOOGLE_GEMINI_MODEL),
+  'gemini-2.5-flash-latest',
+  'models/gemini-2.5-flash-latest',
   'gemini-2.0-flash-exp',
   'models/gemini-2.0-flash-exp',
   'gemini-2.0-flash',
