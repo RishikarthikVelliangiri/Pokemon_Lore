@@ -1,6 +1,9 @@
 import type { NextConfig } from "next";
+import path from "path";
 
 const nextConfig: NextConfig = {
+  // A stray lockfile in the parent folder confuses workspace-root detection.
+  outputFileTracingRoot: path.join(__dirname),
   images: {
     remotePatterns: [
       {

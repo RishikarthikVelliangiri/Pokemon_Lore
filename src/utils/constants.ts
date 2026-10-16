@@ -1,10 +1,10 @@
 // Application constants
 export const APP_CONFIG = {
   name: 'LoreDex',
-  description: 'Discover Pokémon through natural language queries',
+  description: 'Describe a Pokémon and find out which one fits best',
   version: '1.0.0',
   maxQueryLength: 500,
-  searchTimeout: 30000, // 30 seconds
+  searchTimeout: 60000, // 60 seconds (LLM calls can retry across models)
   retryAttempts: 3,
   retryDelay: 1000, // 1 second
   exampleQueries: [

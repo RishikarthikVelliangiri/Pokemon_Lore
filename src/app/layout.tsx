@@ -1,55 +1,42 @@
 import type { Metadata, Viewport } from "next";
+import { Press_Start_2P, Pixelify_Sans } from "next/font/google";
 import "./globals.css";
 import ErrorBoundary from "@/components/ErrorBoundary";
 
+const display = Press_Start_2P({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-display",
+  display: "swap",
+});
+
+const text = Pixelify_Sans({
+  subsets: ["latin", "latin-ext"],
+  variable: "--font-text",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
-  title: "Pokémon Lore Engine - Discover Pokémon through AI",
-  description: "Use natural language to discover Pokémon based on their lore, characteristics, and backstory. Powered by AI and comprehensive Pokémon data.",
-  keywords: ["pokemon", "ai", "search", "lore", "pokedex", "discovery"],
-  authors: [{ name: "Pokémon Lore Engine" }],
+  title: "LoreDex - Which Pokémon fits your description?",
+  description:
+    "Describe a Pokémon in your own words and LoreDex tells you which one fits best, with the lore reasoning behind it.",
+  keywords: ["pokemon", "pokedex", "ai", "search", "lore"],
 };
 
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#D93F3F",
+  themeColor: "#0e1118",
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${display.variable} ${text.variable}`}>
       <body suppressHydrationWarning>
         <ErrorBoundary>
-          <main className="pokedex-main">
-            <div className="pokedex-hinge"></div>
-            <header className="pokedex-header">
-              <div className="camera-lens"></div>
-              <div className="lights">
-                <div className="light red"></div>
-                <div className="light yellow"></div>
-                <div className="light green"></div>
-              </div>
-            </header>
-            <div className="screen-container">
-              {children}
-            </div>
-            <footer className="control-panel">
-              <div className="d-pad"></div>
-              <div className="speaker-grill">
-                {Array.from({ length: 20 }).map((_, i) => (
-                  <div key={i} className="speaker-hole"></div>
-                ))}
-              </div>
-              <div className="action-buttons">
-                <div className="action-button"></div>
-                <div className="action-button round"></div>
-              </div>
-            </footer>
-          </main>
+          <main className="stage">{children}</main>
         </ErrorBoundary>
       </body>
     </html>

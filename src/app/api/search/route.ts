@@ -47,6 +47,22 @@ function getClientIP(request: NextRequest): string {
   return 'unknown';
 }
 
+// First-branch evolution line (e.g. charmander, charmeleon, charizard) as species names.
+async function fetchEvolutionNames(species: PokeAPISpecies): Promise<string[]> {
+  const names: string[] = [];
+  if (!species.evolution_chain?.url) return names;
+  try {
+    let link = (await fetchEvolutionChain(species.evolution_chain.url))?.chain;
+    while (link) {
+      names.push(link.species.name);
+      link = link.evolves_to[0];
+    }
+  } catch (e) {
+    console.warn('Evolution chain unavailable:', e);
+  }
+  return names;
+}
+
 async function fetchAbilityDescriptions(abilityNames: string[]): Promise<Record<string, string>> {
   const descriptions: Record<string, string> = {};
   
@@ -212,7 +228,18 @@ export async function POST(request: NextRequest) {
 
     // Generate embedding for the query
       // If user requested LLM-only mode, ask the LLM to propose candidates and pick directly
-      if (body.useLLMOnly) {
+      // Vector search needs an embedding; if the embedding model is unavailable, degrade to LLM-only
+      // instead of failing the whole request.
+      let queryEmbedding: number[] | undefined;
+      if (!body.useLLMOnly) {
+        try {
+          console.log('🧠 Generating query embedding...');
+          queryEmbedding = await generateEmbedding(sanitizedQuery);
+        } catch (e) {
+          console.warn('⚠️ Embedding unavailable, falling back to LLM-only search:', e);
+        }
+      }
+      if (body.useLLMOnly || !queryEmbedding) {
         const topN = body.topN && Number(body.topN) > 0 ? Math.min(10, Number(body.topN)) : 5;
         console.log(`🤖 LLM-only mode: asking model to propose top ${topN} candidates`);
         const proposed = await llmProposeCandidates(sanitizedQuery, topN);
@@ -292,24 +319,13 @@ export async function POST(request: NextRequest) {
           weight: chosenPokemon.weight,
           abilities: chosenPokemon.abilities.map((ability: any) => ({ name: ability.ability.name, effect: abilityDescriptionsLLM[ability.ability.name] || 'No description available.', isHidden: ability.is_hidden })),
           generation: getGenerationNumber(chosenSpecies.generation.name),
-          evolutionChain: (() => {
-            const names: string[] = [];
-            try {
-              if (chosenSpecies.evolution_chain?.url) {
-                const evo = fetchEvolutionChain(chosenSpecies.evolution_chain.url);
-              }
-            } catch (e) {}
-            return names;
-          })(),
+          evolutionChain: await fetchEvolutionNames(chosenSpecies),
           flavorText: chosenSpecies.flavor_text_entries.find((entry: any) => entry.language.name === 'en')?.flavor_text.replace(/\f/g, ' ').replace(/\n/g, ' ').trim() || '',
           aiDecision: aiDecisionLocal,
         };
 
         return NextResponse.json(responseLLM);
       }
-
-      console.log('🧠 Generating query embedding...');
-      const queryEmbedding = await generateEmbedding(sanitizedQuery);
 
     // Search for similar vectors in Pinecone
   console.log('📊 Searching vector database...');
@@ -498,7 +514,7 @@ export async function POST(request: NextRequest) {
             snippetEmb = (sc as any).values as number[];
           } else {
             // last resort: compute embedding at runtime (should be rare)
-            // eslint-disable-next-line no-await-in-loop
+             
             snippetEmb = await generateEmbedding(snippet);
           }
 
@@ -921,18 +937,7 @@ export async function POST(request: NextRequest) {
       ]);
     }
 
-    // Fetch evolution chain
-    const evolutionChainNames: string[] = [];
-    if (species.evolution_chain?.url) {
-      const evolutionChain = await fetchEvolutionChain(species.evolution_chain.url);
-      if (evolutionChain?.chain) {
-        let currentEvolution = evolutionChain.chain;
-        while (currentEvolution) {
-          evolutionChainNames.push(currentEvolution.species.name);
-          currentEvolution = currentEvolution.evolves_to[0];
-        }
-      }
-    }
+    const evolutionChainNames = await fetchEvolutionNames(species);
 
     // Fetch ability descriptions
     const abilityNames = pokemon.abilities.map(a => a.ability.name);

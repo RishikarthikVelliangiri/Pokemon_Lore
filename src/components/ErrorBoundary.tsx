@@ -1,67 +1,31 @@
 'use client';
 
 import React from 'react';
-import { ErrorBoundaryState } from '@/types/errors';
-import ErrorDisplay from './ui/ErrorDisplay';
 
-interface ErrorBoundaryProps {
-  children: React.ReactNode;
-  fallback?: React.ComponentType<{ error: Error; reset: () => void }>;
-}
+interface State { hasError: boolean }
 
-export default class ErrorBoundary extends React.Component<
-  ErrorBoundaryProps,
-  ErrorBoundaryState
-> {
-  constructor(props: ErrorBoundaryProps) {
-    super(props);
-    this.state = { hasError: false, error: null, errorInfo: null };
+/** Last-resort net: a render crash shows a plain game-over card instead of a white page. */
+export default class ErrorBoundary extends React.Component<{ children: React.ReactNode }, State> {
+  state: State = { hasError: false };
+
+  static getDerivedStateFromError(): State {
+    return { hasError: true };
   }
 
-  static getDerivedStateFromError(error: Error): ErrorBoundaryState {
-    return {
-      hasError: true,
-      error,
-      errorInfo: null,
-    };
+  componentDidCatch(error: Error, info: React.ErrorInfo) {
+    console.error('ErrorBoundary caught an error:', error, info);
   }
-
-  componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
-    console.error('ErrorBoundary caught an error:', error, errorInfo);
-    this.setState({
-      error,
-      errorInfo,
-    });
-  }
-
-  handleReset = () => {
-    this.setState({
-      hasError: false,
-      error: null,
-      errorInfo: null,
-    });
-  };
 
   render() {
-    if (this.state.hasError) {
-      if (this.props.fallback) {
-        const FallbackComponent = this.props.fallback;
-        return (
-          <FallbackComponent
-            error={this.state.error!}
-            reset={this.handleReset}
-          />
-        );
-      }
-
-      return (
-        <ErrorDisplay
-          error="Something went wrong with the application. Please try refreshing the page."
-          onRetry={() => this.setState({ hasError: false, error: null })}
-        />
-      );
-    }
-
-    return this.props.children;
+    if (!this.state.hasError) return this.props.children;
+    return (
+      <div className="stage">
+        <div className="fatal" role="alert">
+          <h1>GAME OVER</h1>
+          <p>Something went wrong with the Pokédex.</p>
+          <button className="lcd-btn" onClick={() => window.location.reload()}>RESTART</button>
+        </div>
+      </div>
+    );
   }
 }

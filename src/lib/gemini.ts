@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars, prefer-const, @typescript-eslint/prefer-as-const */
+/* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars */
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import { createAPIError } from '@/types/errors';
 
@@ -26,26 +26,29 @@ const dedupeModels = (models: string[]): string[] => {
 const TEXT_MODEL_CANDIDATES = dedupeModels([
   ...parseModelList(process.env.GOOGLE_GEMINI_TEXT_MODELS),
   ...parseModelList(process.env.GOOGLE_GEMINI_MODEL),
+  // Current models first; Google retires old ones (1.5 / 2.0 / gemini-pro now 404), so keep this list fresh.
+  'gemini-3.8-flash',
+  'gemini-3.7-flash',
+  'gemini-3.6-flash',
+  'gemini-3.5-flash',
+  'gemini-flash-latest',
   'gemini-2.5-flash',
-  'gemini-2.0-flash-exp',
-  'models/gemini-2.0-flash-exp',
-  'gemini-2.0-flash',
-  'models/gemini-2.0-flash',
-  'gemini-1.5-flash-latest',
-  'models/gemini-1.5-flash-latest',
-  'gemini-1.5-flash',
-  'models/gemini-1.5-flash',
-  'gemini-1.5-flash-001',
-  'models/gemini-1.5-flash-001',
-  'gemini-pro',
-  'models/gemini-pro',
 ]);
 
-const getTextModelCandidates = (): string[] => (
-  TEXT_MODEL_CANDIDATES.length > 0
-    ? TEXT_MODEL_CANDIDATES
-    : ['gemini-1.5-flash-latest', 'gemini-1.5-flash', 'gemini-pro']
-);
+// Models that just hit a quota are skipped for a while (daily caps last far longer than a minute),
+// so one exhausted model doesn't add a failed round-trip to every search.
+const quotaCooldown = new Map<string, number>();
+const markQuotaHit = (model: string, error: any) => {
+  const daily = /PerDay/i.test(String(error?.message || ''));
+  quotaCooldown.set(model, Date.now() + (daily ? 60 * 60 * 1000 : 60 * 1000));
+};
+
+const getTextModelCandidates = (): string[] => {
+  const all = TEXT_MODEL_CANDIDATES.length > 0 ? TEXT_MODEL_CANDIDATES : ['gemini-3.8-flash', 'gemini-2.5-flash'];
+  const now = Date.now();
+  const live = all.filter(m => (quotaCooldown.get(m) ?? 0) <= now);
+  return live.length > 0 ? live : all;
+};
 
 const isModelUnavailableError = (error: any): boolean => {
   if (!error) return false;
@@ -54,6 +57,10 @@ const isModelUnavailableError = (error: any): boolean => {
   if (status === 404) return true;
   return /not\sfound|unsupported|does\snot\sexist|unknown\smodel/.test(message);
 };
+
+// Quota is per model, so a 429 on one model means "try the next one", not "give up".
+const isQuotaError = (error: any): boolean =>
+  (error?.status ?? error?.statusCode) === 429 || /429|quota|too many requests/i.test(String(error?.message || ''));
 
 // Generate embeddings for text
 export const generateEmbedding = async (text: string): Promise<number[]> => {
@@ -152,7 +159,7 @@ export const generateExplanation = async (
   const genAI = new GoogleGenerativeAI(apiKey);
   const modelCandidates = getTextModelCandidates();
 
-  const maxAttempts = 4;
+  const maxAttempts = 2; // switch models sooner rather than hammering one that is overloaded
   let lastError: any = null;
 
   for (const candidate of modelCandidates) {
@@ -211,7 +218,8 @@ export const generateExplanation = async (
 
         console.warn(`Gemini generateContent attempt ${attempt} failed using ${modelName}${isTransient ? ' (transient)' : ''}:`, message);
 
-        if (isUnavailable) {
+        if (isQuotaError(error)) markQuotaHit(modelName, error);
+        if (isUnavailable || isQuotaError(error)) {
           shouldTryNextModel = true;
           break;
         }
@@ -357,7 +365,11 @@ export const llmProposeCandidates = async (query: string, topN: number = 5): Pro
   const prompt = `You are an expert Pokémon identification agent. Given a user query, produce a concise JSON array of up to ${topN} candidate objects sorted by preference. For each candidate provide: name (lowercase), an optional numeric score 0-100, a confidence label (low|medium|high), and a one-sentence justification. You may use general Pokémon knowledge beyond the provided lore to propose plausible candidates; when you do, note it briefly in the "reason" and set confidence accordingly. DO NOT provide chain-of-thought. Return ONLY valid JSON, e.g. [{"name":"pikachu","score":95,"confidence":"high","reason":"Matches the small electric mouse description"}, ...]. User query: "${query}"`;
 
   let lastErr: any = null;
+  let sawQuota = false;
 
+  // Google's models spike to 503 now and then; sweep the candidate list a few times before giving up.
+  for (let pass = 0; pass < 3; pass++) {
+  let sawTransient = false;
   for (const modelName of modelCandidates) {
     if (!modelName) continue;
     const model = genAI.getGenerativeModel({ model: modelName });
@@ -406,16 +418,28 @@ export const llmProposeCandidates = async (query: string, topN: number = 5): Pro
         console.warn(`llmProposeCandidates: model ${modelName} unavailable — trying next candidate.`);
         continue;
       }
+      if (isQuotaError(err)) {
+        console.warn(`llmProposeCandidates: model ${modelName} is over quota — trying next candidate.`);
+        sawQuota = true;
+        markQuotaHit(modelName, err);
+        continue;
+      }
       const msg = String((err as any)?.message || err);
       const isTransient = /overload|503|temporar|timeout|timed out/i.test(msg);
       if (isTransient) {
+        sawTransient = true;
         continue;
       }
       break;
     }
   }
+  if (!sawTransient) break;
+  await sleep(1500 * (pass + 1));
+  }
 
   console.warn('llmProposeCandidates error', lastErr);
+  // Every model refused for quota: say so instead of reporting "no Pokémon found".
+  if (sawQuota) throw new Error('Gemini quota exceeded on all models');
   return [];
 };
 
