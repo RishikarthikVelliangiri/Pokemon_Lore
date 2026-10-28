@@ -2,14 +2,15 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import { createAPIError } from '@/types/errors';
 
-// Get API key from environment - this will be loaded by dotenv in scripts
-const getApiKey = (): string => {
-  const apiKey = process.env.GOOGLE_GEMINI_API_KEY;
-  if (!apiKey) {
-    throw new Error('GOOGLE_GEMINI_API_KEY environment variable is not configured');
-  }
-  return apiKey;
+// Primary key first, then any extras from GOOGLE_GEMINI_API_KEYS (comma-separated). Quota is per key and
+// per model, so a key that runs dry is skipped and the next one takes over.
+const getApiKeys = (): string[] => {
+  const keys = dedupeModels([process.env.GOOGLE_GEMINI_API_KEY || '', ...parseModelList(process.env.GOOGLE_GEMINI_API_KEYS)]);
+  if (keys.length === 0) throw new Error('GOOGLE_GEMINI_API_KEY environment variable is not configured');
+  return keys;
 };
+const getApiKey = (): string => getApiKeys()[0];
+const REQUEST_OPTIONS = { timeout: 15000 }; // a stalled model fails over to the next one instead of holding the search
 
 const parseModelList = (value?: string): string[] => {
   if (!value) return [];
@@ -35,18 +36,26 @@ const TEXT_MODEL_CANDIDATES = dedupeModels([
   'gemini-2.5-flash',
 ]);
 
-// Models that just hit a quota are skipped for a while (daily caps last far longer than a minute),
-// so one exhausted model doesn't add a failed round-trip to every search.
-const quotaCooldown = new Map<string, number>();
-const markQuotaHit = (model: string, error: any) => {
-  const daily = /PerDay/i.test(String(error?.message || ''));
-  quotaCooldown.set(model, Date.now() + (daily ? 60 * 60 * 1000 : 60 * 1000));
-};
+type Attempt = { model: string; apiKey: string };
 
-const getTextModelCandidates = (): string[] => {
-  const all = TEXT_MODEL_CANDIDATES.length > 0 ? TEXT_MODEL_CANDIDATES : ['gemini-3.8-flash', 'gemini-2.5-flash'];
+// A (key, model) pair that just hit its quota is skipped for a while (daily caps last far longer than a minute).
+// A key the API rejects outright (e.g. free tier not enabled for its project) is skipped for an hour.
+const quotaCooldown = new Map<string, number>();
+const rejectedKeys = new Map<string, number>();
+const markQuotaHit = (model: string, apiKey: string, error: any) => {
+  const daily = /PerDay/i.test(String(error?.message || ''));
+  quotaCooldown.set(`${apiKey}|${model}`, Date.now() + (daily ? 60 * 60 * 1000 : 60 * 1000));
+};
+const markKeyRejected = (apiKey: string) => rejectedKeys.set(apiKey, Date.now() + 60 * 60 * 1000);
+
+// Model order first (the best model stays preferred), then each usable key for that model.
+const getAttempts = (): Attempt[] => {
   const now = Date.now();
-  const live = all.filter(m => (quotaCooldown.get(m) ?? 0) <= now);
+  const usableKeys = getApiKeys().filter(k => (rejectedKeys.get(k) ?? 0) <= now);
+  const keys = usableKeys.length > 0 ? usableKeys : getApiKeys();
+  const models = TEXT_MODEL_CANDIDATES.length > 0 ? TEXT_MODEL_CANDIDATES : ['gemini-3.8-flash', 'gemini-2.5-flash'];
+  const all = models.flatMap(model => keys.map(apiKey => ({ model, apiKey })));
+  const live = all.filter(a => (quotaCooldown.get(`${a.apiKey}|${a.model}`) ?? 0) <= now);
   return live.length > 0 ? live : all;
 };
 
@@ -61,6 +70,11 @@ const isModelUnavailableError = (error: any): boolean => {
 // Quota is per model, so a 429 on one model means "try the next one", not "give up".
 const isQuotaError = (error: any): boolean =>
   (error?.status ?? error?.statusCode) === 429 || /429|quota|too many requests/i.test(String(error?.message || ''));
+
+// The key itself is refused (invalid, or free tier not enabled for its project): try another key.
+const isKeyError = (error: any): boolean =>
+  [401, 403].includes(error?.status ?? error?.statusCode) ||
+  /API key not valid|API_KEY_INVALID|free tier is not available|PERMISSION_DENIED/i.test(String(error?.message || ''));
 
 // Generate embeddings for text
 export const generateEmbedding = async (text: string): Promise<number[]> => {
@@ -155,20 +169,19 @@ export const generateExplanation = async (
 
     ${useModelKnowledge ? '' : 'NOTE: Model knowledge is disabled; rely ONLY on the provided lore.'}`;
 
-  const apiKey = getApiKey();
-  const genAI = new GoogleGenerativeAI(apiKey);
-  const modelCandidates = getTextModelCandidates();
+  const attempts = getAttempts();
 
   const maxAttempts = 2; // switch models sooner rather than hammering one that is overloaded
   let lastError: any = null;
 
-  for (const candidate of modelCandidates) {
-    if (!candidate) continue;
+  // A model that is overloaded or stalls is skipped for the other keys in this call (the outage is model-wide).
+  const busyModels = new Set<string>();
+  for (const { model: modelName, apiKey } of attempts) {
+    if (busyModels.has(modelName)) continue;
     let attempt = 0;
     let shouldTryNextModel = false;
-    const modelName = candidate;
     console.log(`🤖 Trying Gemini model: ${modelName}`);
-    const model = genAI.getGenerativeModel({ model: modelName });
+    const model = new GoogleGenerativeAI(apiKey).getGenerativeModel({ model: modelName }, REQUEST_OPTIONS);
 
     while (attempt < maxAttempts) {
       try {
@@ -214,12 +227,13 @@ export const generateExplanation = async (
         const status = errAny?.status || errAny?.statusCode || errAny?.code;
         const message = String(errAny?.message || errAny);
         const isUnavailable = isModelUnavailableError(error);
-        const isTransient = (status && String(status).startsWith('5')) || /overload|overloaded|503|temporar/i.test(message);
+        const isTransient = (status && String(status).startsWith('5')) || /overload|overloaded|503|temporar|abort/i.test(message);
 
         console.warn(`Gemini generateContent attempt ${attempt} failed using ${modelName}${isTransient ? ' (transient)' : ''}:`, message);
 
-        if (isQuotaError(error)) markQuotaHit(modelName, error);
-        if (isUnavailable || isQuotaError(error)) {
+        if (isQuotaError(error)) markQuotaHit(modelName, apiKey, error);
+        if (isKeyError(error)) markKeyRejected(apiKey);
+        if (isUnavailable || isQuotaError(error) || isKeyError(error)) {
           shouldTryNextModel = true;
           break;
         }
@@ -228,8 +242,10 @@ export const generateExplanation = async (
           throw error;
         }
 
-        if (attempt >= maxAttempts) {
+        // A timed-out request is not worth a second try on this model.
+        if (attempt >= maxAttempts || /abort/i.test(message)) {
           console.warn(`Gemini model ${modelName} exhausted retry attempts (transient errors).`);
+          busyModels.add(modelName);
           break;
         }
 
@@ -264,9 +280,7 @@ export const llmRerankCandidates = async (
   query: string,
   candidates: Array<{ name: string; types: string[]; region?: string; loreText?: string }>
 ): Promise<LLMReRankItem[]> => {
-  const apiKey = getApiKey();
-  const genAI = new GoogleGenerativeAI(apiKey);
-  const modelCandidates = getTextModelCandidates();
+  const targets = getAttempts();
   // Build candidate summary blocks for the prompt
   const candidateBlocks = candidates.map((c, idx) => {
     const types = (c.types || []).join(', ');
@@ -279,12 +293,11 @@ export const llmRerankCandidates = async (
 
   let lastErr: any = null;
 
-  for (const modelName of modelCandidates) {
-    if (!modelName) continue;
+  for (const { model: modelName, apiKey } of targets) {
     let attempts = 0;
     let lastErrorWasTransient = false;
     let shouldTryNextModel = false;
-    const model = genAI.getGenerativeModel({ model: modelName });
+    const model = new GoogleGenerativeAI(apiKey).getGenerativeModel({ model: modelName }, REQUEST_OPTIONS);
 
     while (attempts < 3) {
       attempts += 1;
@@ -318,10 +331,12 @@ export const llmRerankCandidates = async (
         lastErrorWasTransient = false;
         const isUnavailable = isModelUnavailableError(err);
         const msg = String((err as any)?.message || err);
-        const isTransient = /overload|503|temporar|timeout|timed out/i.test(msg);
+        const isTransient = /overload|503|temporar|timeout|timed out|abort/i.test(msg);
         lastErrorWasTransient = isTransient;
 
-        if (isUnavailable) {
+        if (isQuotaError(err)) markQuotaHit(modelName, apiKey, err);
+        if (isKeyError(err)) markKeyRejected(apiKey);
+        if (isUnavailable || isQuotaError(err) || isKeyError(err)) {
           shouldTryNextModel = true;
           break;
         }
@@ -358,9 +373,7 @@ export const llmRerankCandidates = async (
 export type LLMProposal = { name: string; score?: number; confidence?: 'low' | 'medium' | 'high'; reason?: string };
 
 export const llmProposeCandidates = async (query: string, topN: number = 5): Promise<LLMProposal[]> => {
-  const apiKey = getApiKey();
-  const genAI = new GoogleGenerativeAI(apiKey);
-  const modelCandidates = getTextModelCandidates();
+  const targets = getAttempts();
 
   const prompt = `You are an expert Pokémon identification agent. Given a user query, produce a concise JSON array of up to ${topN} candidate objects sorted by preference. For each candidate provide: name (lowercase), an optional numeric score 0-100, a confidence label (low|medium|high), and a one-sentence justification. You may use general Pokémon knowledge beyond the provided lore to propose plausible candidates; when you do, note it briefly in the "reason" and set confidence accordingly. DO NOT provide chain-of-thought. Return ONLY valid JSON, e.g. [{"name":"pikachu","score":95,"confidence":"high","reason":"Matches the small electric mouse description"}, ...]. User query: "${query}"`;
 
@@ -368,11 +381,13 @@ export const llmProposeCandidates = async (query: string, topN: number = 5): Pro
   let sawQuota = false;
 
   // Google's models spike to 503 now and then; sweep the candidate list a few times before giving up.
-  for (let pass = 0; pass < 3; pass++) {
+  for (let pass = 0; pass < 2; pass++) {
   let sawTransient = false;
-  for (const modelName of modelCandidates) {
-    if (!modelName) continue;
-    const model = genAI.getGenerativeModel({ model: modelName });
+  // A model that spiked or stalled this pass is skipped for its other keys: the outage is model-wide.
+  const busyModels = new Set<string>();
+  for (const { model: modelName, apiKey } of targets) {
+    if (busyModels.has(modelName)) continue;
+    const model = new GoogleGenerativeAI(apiKey).getGenerativeModel({ model: modelName }, REQUEST_OPTIONS);
     try {
       const res = await model.generateContent(prompt);
       const text = await extractTextFromModelResponse(res);
@@ -418,16 +433,22 @@ export const llmProposeCandidates = async (query: string, topN: number = 5): Pro
         console.warn(`llmProposeCandidates: model ${modelName} unavailable — trying next candidate.`);
         continue;
       }
+      if (isKeyError(err)) {
+        console.warn(`llmProposeCandidates: key refused for ${modelName} — trying next key.`);
+        markKeyRejected(apiKey);
+        continue;
+      }
       if (isQuotaError(err)) {
-        console.warn(`llmProposeCandidates: model ${modelName} is over quota — trying next candidate.`);
+        console.warn(`llmProposeCandidates: model ${modelName} is over quota on this key — trying next candidate.`);
         sawQuota = true;
-        markQuotaHit(modelName, err);
+        markQuotaHit(modelName, apiKey, err);
         continue;
       }
       const msg = String((err as any)?.message || err);
-      const isTransient = /overload|503|temporar|timeout|timed out/i.test(msg);
+      const isTransient = /overload|503|temporar|timeout|timed out|abort/i.test(msg);
       if (isTransient) {
         sawTransient = true;
+        busyModels.add(modelName);
         continue;
       }
       break;
@@ -446,14 +467,9 @@ export const llmProposeCandidates = async (query: string, topN: number = 5): Pro
 // Lightweight health check for Gemini connectivity used by the health endpoint
 export const testGeminiConnection = async (): Promise<boolean> => {
   try {
-    const apiKey = getApiKey();
-    const genAI = new GoogleGenerativeAI(apiKey);
-    const modelCandidates = getTextModelCandidates();
-
-    for (const modelName of modelCandidates) {
-      if (!modelName) continue;
+    for (const { model: modelName, apiKey } of getAttempts()) {
       try {
-        const model = genAI.getGenerativeModel({ model: modelName });
+        const model = new GoogleGenerativeAI(apiKey).getGenerativeModel({ model: modelName }, REQUEST_OPTIONS);
         const res = await model.generateContent('Health check. Respond with OK.');
         const text = await extractTextFromModelResponse(res);
         if (text && /ok/i.test(text)) {
@@ -465,7 +481,7 @@ export const testGeminiConnection = async (): Promise<boolean> => {
           continue;
         }
         const msg = String((err as any)?.message || err);
-        const isTransient = /overload|503|temporar|timeout|timed out/i.test(msg);
+        const isTransient = /overload|503|temporar|timeout|timed out|abort/i.test(msg);
         if (isTransient) {
           continue;
         }
