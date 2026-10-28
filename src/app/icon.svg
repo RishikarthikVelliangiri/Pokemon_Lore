@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <rect x="1" y="1" width="30" height="30" rx="6" fill="#bd252b" stroke="#4e0f13" stroke-width="2"/>
+  <rect x="3" y="3" width="26" height="6" rx="3" fill="#d6403f"/>
+  <circle cx="16" cy="12" r="6.5" fill="#1c1d22"/>
+  <circle cx="16" cy="12" r="4.8" fill="#6fd0ff"/>
+  <circle cx="16" cy="12" r="4.8" fill="url(#lens)"/>
+  <circle cx="14.2" cy="10.2" r="1.4" fill="#eaffff"/>
+  <rect x="5" y="21" width="22" height="7" rx="1.5" fill="#1c1d22"/>
+  <rect x="7" y="23" width="18" height="3" fill="#b7cf8c"/>
+  <circle cx="26" cy="7" r="1" fill="#ff4a4a"/>
+  <defs>
+    <radialGradient id="lens" cx="0.36" cy="0.3" r="0.7">
+      <stop offset="0" stop-color="#6fd0ff" stop-opacity="0"/>
+      <stop offset="1" stop-color="#0a2c66"/>
+    </radialGradient>
+  </defs>
+</svg>
